@@ -5,4 +5,14 @@
     <RootNamespace>BT_BuildingsBL</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BT-BuildingsDAL\BT-BuildingsDAL.csproj" />
+    <ProjectReference Include="..\BT-BuildingsMODELS\BT-BuildingsMODELS.csproj" />
+    <ProjectReference Include="..\BT-BuildingsSHARED\BT-BuildingsSHARED.csproj" />
+  </ItemGroup>
+
 </Project>

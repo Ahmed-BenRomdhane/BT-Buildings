@@ -14,7 +14,7 @@ namespace BT_BuildingsDAL
         [Range(10, 1000)]
         public decimal Area { get; set; }
         [Required(ErrorMessage = "Please enter building price")]
-        public decimal Price { get; set; }
+        public double Price { get; set; }
         public string Description{ get; set; }
         [Required(ErrorMessage = "Please enter building name")]
         public string Name { get; set; }

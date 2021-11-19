@@ -2,8 +2,10 @@
 using BT_BuildingsBL.IRepositories;
 using BT_BuildingsDAL;
 using BT_BuildingsMODELS;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BT_BuildingsBL.Repositories
@@ -17,34 +19,87 @@ namespace BT_BuildingsBL.Repositories
             _db = db;
             _mapper = mapper;
         }
-        public Task<BuildingDTO> CreateBuilding(BuildingDTO building)
+        public async Task<BuildingDTO> CreateBuilding(BuildingDTO buildingDTO)
         {
-            throw new NotImplementedException();
+            var building = _mapper.Map<BuildingDTO, Building>(buildingDTO);
+            building.PublishDate = DateTime.Now;
+            building.TotalViews = 0;
+            building.TotalLikes = 0;
+            var newBuilding = await _db.Buildings.AddAsync(building);
+            await _db.SaveChangesAsync();
+            return _mapper.Map<Building, BuildingDTO>(newBuilding.Entity);
         }
 
-        public Task<Guid> DeleteBuilding(Guid buildingId)
+        public async Task<Guid> DeleteBuilding(Guid buildingId)
         {
-            throw new NotImplementedException();
+            var building = await _db.Buildings.FindAsync(buildingId);
+            if (building != null)
+            {
+                var allBuildingimages = await _db.BuildingImages.Where(b => b.BuildingId == buildingId).ToListAsync();
+                _db.BuildingImages.RemoveRange(allBuildingimages);
+                _db.Buildings.Remove(building);
+                await _db.SaveChangesAsync();
+            }
+            return buildingId;
         }
 
-        public Task<IEnumerable<BuildingDTO>> GetAllBuildings()
+        public async Task<BuildingDTO> UpdateBuilding(Guid buildingId, BuildingDTO buildingDTO)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (buildingId == buildingDTO.Id)
+                {
+                    Building building = _mapper.Map(buildingDTO, await _db.Buildings.FindAsync(buildingId));
+                    building.PublishDate = DateTime.Now;
+                    var updatedBuilding = _db.Buildings.Update(building);
+                    await _db.SaveChangesAsync();
+                    return _mapper.Map<Building, BuildingDTO>(updatedBuilding.Entity);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public Task<BuildingDTO> GetBuilding(Guid buildingId)
+        public IEnumerable<BuildingDTO> GetAllBuildings()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _mapper.Map<IEnumerable<Building>, IEnumerable<BuildingDTO>>(_db.Buildings.Include(b => b.BuildingImages));
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public Task<BuildingDTO> IsBuildingAlreadyExists(string name, double price)
+        public async Task<BuildingDTO> GetBuilding(Guid buildingId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _mapper.Map<Building, BuildingDTO>(await _db.Buildings.Include(b => b.BuildingImages).
+                    FirstOrDefaultAsync(building => building.Id == buildingId));
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public Task<BuildingDTO> UpdateBuilding(Guid buildingId, BuildingDTO building)
+        public async Task<BuildingDTO> IsBuildingAlreadyExists(string name, double price)
         {
-            throw new NotImplementedException();
+            var building = await _db.Buildings.FirstOrDefaultAsync(b => b.Name.ToLower() == name.ToLower() && b.Price == price);
+            if (building != null)
+            {
+                return _mapper.Map<Building, BuildingDTO>(building);
+            }
+            return null;
+        
         }
     }
 }

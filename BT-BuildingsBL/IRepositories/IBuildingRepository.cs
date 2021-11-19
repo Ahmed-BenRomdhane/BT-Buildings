@@ -7,11 +7,11 @@ namespace BT_BuildingsBL.IRepositories
 {
     public interface IBuildingRepository
     {
-        public Task<BuildingDTO> CreateBuilding(BuildingDTO building);
-        public Task<BuildingDTO> UpdateBuilding(Guid buildingId, BuildingDTO building);
+        public Task<BuildingDTO> CreateBuilding(BuildingDTO buildingDTO);
+        public Task<BuildingDTO> UpdateBuilding(Guid buildingId, BuildingDTO buildingDTO);
         public Task<Guid> DeleteBuilding(Guid buildingId);
-        public Task<IEnumerable<BuildingDTO>> GetAllBuildings();
         public Task<BuildingDTO> GetBuilding(Guid buildingId);
         public Task<BuildingDTO> IsBuildingAlreadyExists(string name, double price);
+        public IEnumerable<BuildingDTO> GetAllBuildings();
     }
 }

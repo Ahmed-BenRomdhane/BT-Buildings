@@ -7,6 +7,6 @@ namespace BT_BuildingsBL.IRepositories
     {
         public Task<OwnerDTO> CreateOwner(OwnerDTO ownerDTO);
         public Task<OwnerDTO> GetOwner(int ownerCIN);
-        public Task<OwnerDTO> IsOwnerAlreadyExists(int ownerCIN)
+        public Task<OwnerDTO> IsOwnerAlreadyExists(int ownerCIN);
     }
 }

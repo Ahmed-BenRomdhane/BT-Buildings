@@ -1,11 +1,14 @@
+using BT_BuildingsBL.IRepositories;
+using BT_BuildingsBL.Repositories;
 using BT_BuildingsDAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace BT_BuildingsAPI
 {
@@ -24,6 +27,18 @@ namespace BT_BuildingsAPI
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IAddressRepository, AddressRepository>();
+            services.AddScoped<IOwnerRepository, OwnerRepository>();
+            services.AddScoped<IBuildingImagesRepository, BuildingImagesRepository>();
+            services.AddScoped<IBuildingRepository, BuildingRepository>();
+
+            services.AddCors(o => o.AddPolicy("BT-Buildings", builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "BT_BuildingsAPI", Version = "v1" });
@@ -40,6 +55,7 @@ namespace BT_BuildingsAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BT_BuildingsAPI v1"));
             }
             app.UseHttpsRedirection();
+            app.UseCors("BT-Buildings");
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

@@ -6,6 +6,8 @@ namespace BT_BuildingsDAL
     public class Owner
     {
         [Key]
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Please enter a valid CIN")]
         public int CIN { get; set; }
         [Required(ErrorMessage = "Please enter a valid email")]
         public string Email { get; set; }

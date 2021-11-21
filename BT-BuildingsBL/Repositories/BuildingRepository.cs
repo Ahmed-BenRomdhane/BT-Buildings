@@ -82,8 +82,8 @@ namespace BT_BuildingsBL.Repositories
         {
             try
             {
-                return _mapper.Map<Building, BuildingDTO>(await _db.Buildings.Include(b => b.BuildingImages).
-                    FirstOrDefaultAsync(building => building.Id == buildingId));
+                return _mapper.Map<Building, BuildingDTO>(_db.Buildings.Include(b => b.BuildingImages).Include(b => b.Owner).Include(b => b.Address).
+                    FirstOrDefault(building => building.Id == buildingId));
             }
             catch (Exception)
             {

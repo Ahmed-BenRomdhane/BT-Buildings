@@ -28,7 +28,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "passing a null owner"
+                    ErrorMessage = "passing a null owner"
                 });
             }
             var result = await _ownerRepository.CreateOwner(ownerDTO);
@@ -37,7 +37,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
 
@@ -52,18 +52,18 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "invalid CIN number"
+                    ErrorMessage = "invalid CIN number"
                 });
             }
             var result = await _ownerRepository.IsOwnerAlreadyExists((int)ownerCIN);
             if (result == null)
             {
-                return NotFound(new APIResult()
+                return Ok(new APIResult()
                 {
                     Success = true,
                     StatusCode = (int)HttpStatusCode.NotFound,
                     Data = result,
-                    ErrorMeassge = null
+                    ErrorMessage = null
                 });
             }
             return Ok(new APIResult()
@@ -71,7 +71,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.NoContent,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
     }

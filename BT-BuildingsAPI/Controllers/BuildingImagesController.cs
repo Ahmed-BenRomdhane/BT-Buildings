@@ -29,7 +29,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "image cannot be null"
+                    ErrorMessage = "image cannot be null"
                 });
             }
             var result = await _buildingImagesRepository.CreateBuildingImage(buildingImageDTO);
@@ -40,7 +40,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.InternalServerError,
                     Data = null,
-                    ErrorMeassge = "there was a problem when creating a new image"
+                    ErrorMessage = "there was a problem when creating a new image"
                 });
             }
             return Ok(new APIResult()
@@ -48,7 +48,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
 
@@ -63,7 +63,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "building cannot be empty"
+                    ErrorMessage = "building cannot be empty"
                 });
             }
             var result = await _buildingImagesRepository.DeleteBuildingImagesByBuildingId(buildingId);
@@ -72,7 +72,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
 
@@ -87,7 +87,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "image cannot be empty"
+                    ErrorMessage = "image cannot be empty"
                 });
             }
             var result = await _buildingImagesRepository.DeleteBuildingImageByImageId(imageId);
@@ -96,7 +96,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
 
@@ -111,7 +111,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "building cannot be empty"
+                    ErrorMessage = "building cannot be empty"
                 });
             }
             var result = await _buildingImagesRepository.GetAllBuildingImages(buildingId);
@@ -120,7 +120,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
     }

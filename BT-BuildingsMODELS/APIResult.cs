@@ -11,6 +11,6 @@ namespace BT_BuildingsMODELS
         public bool Success { get; set; }
         public int StatusCode { get; set; }
         public object Data { get; set; }
-        public string ErrorMeassge { get; set; }
+        public string ErrorMessage { get; set; }
     }
 }

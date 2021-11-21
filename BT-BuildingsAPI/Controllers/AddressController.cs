@@ -28,7 +28,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "address cannot be null"
+                    ErrorMessage = "address cannot be null"
                 });
             }
             if (string.IsNullOrEmpty(addressDTO.City))
@@ -38,27 +38,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "City is mandatory"
-                });
-            }
-            if (string.IsNullOrEmpty(addressDTO.CountryCode))
-            {
-                return BadRequest(new APIResult()
-                {
-                    Success = false,
-                    StatusCode = (int)HttpStatusCode.BadRequest,
-                    Data = null,
-                    ErrorMeassge = "CountryCode is mandatory"
-                });
-            }
-            if (string.IsNullOrEmpty(addressDTO.HouseNumber))
-            {
-                return BadRequest(new APIResult()
-                {
-                    Success = false,
-                    StatusCode = (int)HttpStatusCode.BadRequest,
-                    Data = null,
-                    ErrorMeassge = "HouseNumber is mandatory"
+                    ErrorMessage = "City is mandatory"
                 });
             }
             if (string.IsNullOrEmpty(addressDTO.PostalCode))
@@ -68,17 +48,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "PostalCode is mandatory"
-                });
-            }
-            if (string.IsNullOrEmpty(addressDTO.Province))
-            {
-                return BadRequest(new APIResult()
-                {
-                    Success = false,
-                    StatusCode = (int)HttpStatusCode.BadRequest,
-                    Data = null,
-                    ErrorMeassge = "Province is mandatory"
+                    ErrorMessage = "PostalCode is mandatory"
                 });
             }
             if (string.IsNullOrEmpty(addressDTO.StreetName))
@@ -88,7 +58,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "StreetName is mandatory"
+                    ErrorMessage = "StreetName is mandatory"
                 });
             }
             var result = await _addressRepository.CreateAddress(addressDTO);
@@ -97,7 +67,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
     }

@@ -29,7 +29,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "building cannot be null"
+                    ErrorMessage = "building cannot be null"
                 });
             }
             if (string.IsNullOrEmpty(buildingDTO.Name))
@@ -39,7 +39,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "building name is mandatory"
+                    ErrorMessage = "building name is mandatory"
                 });
             }
             if (double.IsNaN(buildingDTO.Price) || buildingDTO.Price < 0)
@@ -49,7 +49,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "building price is invalid"
+                    ErrorMessage = "building price is invalid"
                 });
             }
             var result = await _buildingRepository.CreateBuilding(buildingDTO);
@@ -60,7 +60,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.InternalServerError,
                     Data = null,
-                    ErrorMeassge = "there was a problem when creating a new building"
+                    ErrorMessage = "there was a problem when creating a new building"
                 });
             }
             return Ok(new APIResult()
@@ -68,7 +68,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
 
@@ -83,7 +83,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "building cannot be null"
+                    ErrorMessage = "building cannot be null"
                 });
             }
             var result = await _buildingRepository.UpdateBuilding(buildingId, buildingDTO);
@@ -94,7 +94,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.InternalServerError,
                     Data = null,
-                    ErrorMeassge = "there was a problem when updating a new building"
+                    ErrorMessage = "there was a problem when updating a new building"
                 });
             }
             return Ok(new APIResult()
@@ -102,7 +102,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
 
@@ -117,7 +117,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "building cannot be empty"
+                    ErrorMessage = "building cannot be empty"
                 });
             }
             var result = await _buildingRepository.DeleteBuilding(buildingId);
@@ -126,7 +126,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
 
@@ -141,7 +141,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "building cannot be empty"
+                    ErrorMessage = "building cannot be empty"
                 });
             }
             var result = await _buildingRepository.GetBuilding(buildingId);
@@ -152,7 +152,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.InternalServerError,
                     Data = null,
-                    ErrorMeassge = "there was a problem when getting a new building"
+                    ErrorMessage = "there was a problem when getting a new building"
                 });
             }
             return Ok(new APIResult()
@@ -160,7 +160,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
 
@@ -175,7 +175,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "name cannot be empty"
+                    ErrorMessage = "name cannot be empty"
                 });
             }
             if (price < 0)
@@ -185,7 +185,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = false,
                     StatusCode = (int)HttpStatusCode.BadRequest,
                     Data = null,
-                    ErrorMeassge = "price is invalid"
+                    ErrorMessage = "price is invalid"
                 });
             }
             var result = await _buildingRepository.IsBuildingAlreadyExists(name, price);
@@ -196,7 +196,7 @@ namespace BT_BuildingsAPI.Controllers
                     Success = true,
                     StatusCode = (int)HttpStatusCode.NotFound,
                     Data = "building does not exist",
-                    ErrorMeassge = null
+                    ErrorMessage = null
                 });
             }
             return Ok(new APIResult()
@@ -204,7 +204,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
 
@@ -218,7 +218,7 @@ namespace BT_BuildingsAPI.Controllers
                 Success = true,
                 StatusCode = (int)HttpStatusCode.OK,
                 Data = result,
-                ErrorMeassge = null
+                ErrorMessage = null
             });
         }
     }

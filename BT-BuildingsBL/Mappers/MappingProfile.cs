@@ -11,6 +11,7 @@ namespace Business.Mapper
             CreateMap<BuildingDTO, Building>().ReverseMap();
             CreateMap<OwnerDTO, Owner>().ReverseMap();
             CreateMap<AddressDTO, Address>().ReverseMap();
+            CreateMap<BuildingImageDTO, BuildingImage>().ReverseMap();
         }
     }
 }
